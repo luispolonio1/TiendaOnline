@@ -27,4 +27,7 @@ urlpatterns = [
     #    path('admin/', admin.site.urls),
 path('', view.index,name="index"),
 path('GuardarProductos/', view.guardar_producto,name="guardar_producto"),
+path('ProductosYajustes',view.productos_ajustes,name="productos_ajustes"),
+path('EliminarProductos/<int:pk>/', view.eliminar_producto,name="eliminar_producto"),
+path('ModificarProducto/<int:pk>/', view.modificar_producto,name="modificar_producto"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
