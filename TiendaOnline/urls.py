@@ -30,4 +30,5 @@ path('GuardarProductos/', view.guardar_producto,name="guardar_producto"),
 path('ProductosYajustes',view.productos_ajustes,name="productos_ajustes"),
 path('EliminarProductos/<int:pk>/', view.eliminar_producto,name="eliminar_producto"),
 path('ModificarProducto/<int:pk>/', view.modificar_producto,name="modificar_producto"),
+path('AgregarProductoCarrito/<int:pk>/', view.suma_productos_agregados,name="suma_productos_agregados"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

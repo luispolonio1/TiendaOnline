@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .formularios import FormularioProducto
 from .models import Producto
 from django.contrib import messages
+from django.http import JsonResponse
 
 def index(request):
     productos=Producto.objects.all()
@@ -40,3 +41,15 @@ def modificar_producto(request,pk):
     else:
         formulario=FormularioProducto(instance=producto)
     return render(request,'Guardar_producto.html',{'formulario':formulario})
+
+
+def suma_productos_agregados(request,pk):
+    producto=get_object_or_404(Producto,pk=pk)
+    if request.method=='POST':
+        datos={
+            'nombre':producto.nombre,
+            'precio':producto.precio,
+        }
+        return JsonResponse(datos)
+
+
