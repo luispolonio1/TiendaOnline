@@ -3,6 +3,7 @@ from .formularios import FormularioProducto
 from .models import Producto
 from django.contrib import messages
 from django.http import JsonResponse
+import json
 
 def index(request):
     productos=Producto.objects.all()
@@ -49,7 +50,18 @@ def suma_productos_agregados(request,pk):
         datos={
             'nombre':producto.nombre,
             'precio':producto.precio,
+            'stock':producto.stock,
         }
         return JsonResponse(datos)
 
 
+def recibir_datos(request):
+    if request.method == 'POST':
+        productos_js = json.loads(request.body)# Leer los datos del cuerpo de la solicitud
+        for producto in productos_js:
+            nombre = producto.get('nombre')
+            cantidad = producto.get('stock')
+            print(f"Nombre: {nombre}, Cantidad: {cantidad}")
+
+        # Responder al cliente
+        return JsonResponse({'mensaje': 'Datos recibidos correctamente'})
